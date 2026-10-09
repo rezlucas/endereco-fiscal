@@ -1,0 +1,470 @@
+<!--
+  Formulário Smart (coworking) — HubSpot form f9c089f7-0d36-48d6-a2e6-e76cf0c2b4f1
+  (portal 51922874). Bloco único para colar em um Embed, envia direto para a Forms Submissions
+  API do HubSpot — mesmo padrão de código/validação do embed-v3.html, prefixo "hsm-". Etapa única
+  (o formulário tem poucos campos e não precisa de divisão em passos).
+
+  Campos e nomes internos — você passou esses nomes diretamente (sem print de "Editar campo" do
+  HubSpot para confirmar), então tratei como os nomes internos reais:
+    name, email, phone, produto_de_interessse, tem_contrato_social, estado_uf, unidades
+    UTMs ocultos: utm_term, utm_content, utm_source, utm_medium, utm_campaign
+
+  TODO antes de publicar:
+  1) "name" não é a propriedade padrão de Contato do HubSpot (o padrão é firstname/lastname,
+     como nos outros formulários deste projeto) — presumi que é uma propriedade customizada de
+     nome único/completo. Confirme se é isso mesmo ou se precisa virar firstname+lastname.
+  2) "produto_de_interessse" (nome com esse typo mesmo, mantive como você passou) — assumi 2
+     opções (Coworking / Endereço Fiscal) como valores separados de um select; confirme se é
+     assim ou se são outras opções / campo de múltipla escolha.
+  3) Cor de marca da Smart não foi informada — usei um azul neutro (#2f6fed) como placeholder.
+     Me avise a cor certa se tiver uma definida.
+  4) Sem bloco de consentimento/LGPD neste formulário (não foi pedido) — avise se precisar.
+-->
+<div class="hsm-wrap">
+  <form class="hsm-form" id="hsm-form" novalidate>
+    <div class="hsm-field">
+      <label for="hsm-name">Nome<span class="hsm-req">*</span></label>
+      <input type="text" id="hsm-name" name="name" autocomplete="name" required aria-describedby="hsm-name-error">
+      <p class="hsm-error" id="hsm-name-error"></p>
+    </div>
+
+    <div class="hsm-field">
+      <label for="hsm-email">E-mail<span class="hsm-req">*</span></label>
+      <input type="email" id="hsm-email" name="email" autocomplete="email" required aria-describedby="hsm-email-error">
+      <p class="hsm-error" id="hsm-email-error"></p>
+    </div>
+
+    <div class="hsm-field">
+      <label for="hsm-phone">Telefone<span class="hsm-req">*</span></label>
+      <div class="hsm-phone-group">
+        <span class="hsm-ddi">BR&nbsp;+55</span>
+        <input type="tel" id="hsm-phone" name="phone" inputmode="numeric" autocomplete="tel" required aria-describedby="hsm-phone-error">
+      </div>
+      <p class="hsm-error" id="hsm-phone-error"></p>
+    </div>
+
+    <div class="hsm-field">
+      <label for="hsm-produto">Produto de interesse<span class="hsm-req">*</span></label>
+      <select id="hsm-produto" name="produto_de_interessse" required aria-describedby="hsm-produto-error">
+        <option value="">Selecione...</option>
+        <option value="Coworking">Coworking</option>
+        <option value="Endereço Fiscal">Endereço Fiscal</option>
+      </select>
+      <p class="hsm-error" id="hsm-produto-error"></p>
+    </div>
+
+    <div class="hsm-field">
+      <label for="hsm-contrato">Tem contrato social?<span class="hsm-req">*</span></label>
+      <select id="hsm-contrato" name="tem_contrato_social" required aria-describedby="hsm-contrato-error">
+        <option value="">Selecione...</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+      <p class="hsm-error" id="hsm-contrato-error"></p>
+    </div>
+
+    <div class="hsm-field">
+      <label for="hsm-estado">Estado (UF)<span class="hsm-req">*</span></label>
+      <select id="hsm-estado" name="estado_uf" required aria-describedby="hsm-estado-error">
+        <option value="">Selecione...</option>
+        <option value="AC">Acre (AC)</option>
+        <option value="AL">Alagoas (AL)</option>
+        <option value="AP">Amapá (AP)</option>
+        <option value="AM">Amazonas (AM)</option>
+        <option value="BA">Bahia (BA)</option>
+        <option value="CE">Ceará (CE)</option>
+        <option value="DF">Distrito Federal (DF)</option>
+        <option value="ES">Espírito Santo (ES)</option>
+        <option value="GO">Goiás (GO)</option>
+        <option value="MA">Maranhão (MA)</option>
+        <option value="MT">Mato Grosso (MT)</option>
+        <option value="MS">Mato Grosso do Sul (MS)</option>
+        <option value="MG">Minas Gerais (MG)</option>
+        <option value="PA">Pará (PA)</option>
+        <option value="PB">Paraíba (PB)</option>
+        <option value="PR">Paraná (PR)</option>
+        <option value="PE">Pernambuco (PE)</option>
+        <option value="PI">Piauí (PI)</option>
+        <option value="RJ">Rio de Janeiro (RJ)</option>
+        <option value="RN">Rio Grande do Norte (RN)</option>
+        <option value="RS">Rio Grande do Sul (RS)</option>
+        <option value="RO">Rondônia (RO)</option>
+        <option value="RR">Roraima (RR)</option>
+        <option value="SC">Santa Catarina (SC)</option>
+        <option value="SP">São Paulo (SP)</option>
+        <option value="SE">Sergipe (SE)</option>
+        <option value="TO">Tocantins (TO)</option>
+      </select>
+      <p class="hsm-error" id="hsm-estado-error"></p>
+    </div>
+
+    <div class="hsm-field">
+      <label for="hsm-unidade">Unidade de interesse<span class="hsm-req">*</span></label>
+      <select id="hsm-unidade" name="unidades" required aria-describedby="hsm-unidade-error">
+        <option value="">Selecione...</option>
+        <option value="Paulista I">Paulista I</option>
+        <option value="Paulista II">Paulista II</option>
+        <option value="Berrini">Berrini</option>
+        <option value="Savassi">Savassi</option>
+        <option value="Asa Norte">Asa Norte</option>
+        <option value="Asa Sul">Asa Sul</option>
+        <option value="Aguas Claras">Aguas Claras</option>
+        <option value="Barra da Tijuca">Barra da Tijuca</option>
+      </select>
+      <p class="hsm-error" id="hsm-unidade-error"></p>
+    </div>
+
+    <button type="submit" id="hsm-submit">Enviar</button>
+    <p class="hsm-submit-error" id="hsm-submit-error">Não foi possível enviar seu formulário. Tente novamente.</p>
+  </form>
+
+  <div class="hsm-success" id="hsm-success">
+    <h3>Formulário enviado</h3>
+    <p>Obrigado, entraremos em contato em breve.</p>
+  </div>
+</div>
+
+<style>
+  .hsm-wrap {
+    --hsm-ink: #1c2333;
+    --hsm-muted: #6b7280;
+    --hsm-line: #d8dce3;
+    --hsm-surface: #f7f8fa;
+    --hsm-surface-hover: #ffffff;
+    --hsm-brand: #2f6fed;
+    --hsm-brand-dark: #2458c2;
+    --hsm-brand-ring: rgba(47, 111, 237, .18);
+    --hsm-error: #c0342a;
+    --hsm-error-bg: #fdf2f1;
+    --hsm-error-ring: rgba(192, 52, 42, .14);
+    width: 100%;
+    max-width: 560px;
+    font-family: inherit;
+    color: var(--hsm-ink);
+  }
+
+  .hsm-form { display: flex; flex-direction: column; gap: 20px; }
+  .hsm-field { display: flex; flex-direction: column; }
+
+  .hsm-field label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--hsm-ink);
+    margin-bottom: 6px;
+  }
+
+  .hsm-req { color: var(--hsm-error); margin-left: 2px; }
+
+  .hsm-field input[type="text"],
+  .hsm-field input[type="tel"],
+  .hsm-field input[type="email"],
+  .hsm-field select {
+    width: 100%;
+    border: 1.5px solid var(--hsm-line);
+    background: var(--hsm-surface);
+    color: var(--hsm-ink);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-size: 15px;
+    line-height: 1.4;
+    font-family: inherit;
+    transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+  }
+
+  .hsm-field select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 36px;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5 7.5l5 5 5-5' stroke='%236b7280' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 11px 11px;
+    cursor: pointer;
+  }
+
+  .hsm-field input::placeholder { color: #9aa1ad; }
+
+  .hsm-field input:focus,
+  .hsm-field select:focus {
+    outline: none;
+    border-color: var(--hsm-brand);
+    background-color: var(--hsm-surface-hover);
+    box-shadow: 0 0 0 3px var(--hsm-brand-ring);
+  }
+
+  .hsm-field input.hsm-field--invalid,
+  .hsm-field select.hsm-field--invalid {
+    border-color: var(--hsm-error);
+    background-color: var(--hsm-error-bg);
+  }
+
+  .hsm-field input.hsm-field--invalid:focus,
+  .hsm-field select.hsm-field--invalid:focus {
+    box-shadow: 0 0 0 3px var(--hsm-error-ring);
+  }
+
+  .hsm-phone-group { display: flex; gap: 8px; }
+  .hsm-ddi {
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid var(--hsm-line); background: var(--hsm-surface);
+    color: var(--hsm-ink); border-radius: 8px; font-weight: 500;
+    padding: 0 12px; font-size: 14px; white-space: nowrap;
+  }
+  .hsm-phone-group input { flex: 1; min-width: 0; }
+
+  .hsm-error {
+    color: var(--hsm-error);
+    font-size: 12.5px;
+    font-weight: 500;
+    margin: 6px 0 0;
+    min-height: 15px;
+  }
+
+  #hsm-submit {
+    align-self: flex-start;
+    border: 0;
+    border-radius: 10px;
+    background: var(--hsm-brand);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 32px;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(28, 35, 51, .12);
+    transition: background-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+  }
+  #hsm-submit:hover:not(:disabled) {
+    background: var(--hsm-brand-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(28, 35, 51, .18);
+  }
+  #hsm-submit:active:not(:disabled) { transform: translateY(0); }
+  #hsm-submit:focus-visible { outline: 2px solid var(--hsm-brand); outline-offset: 2px; }
+  #hsm-submit:disabled { opacity: .55; cursor: not-allowed; box-shadow: none; }
+
+  .hsm-submit-error { color: var(--hsm-error); display: none; margin: 0; font-size: 13.5px; }
+  .hsm-submit-error.show { display: block; }
+
+  .hsm-success {
+    display: none;
+    padding: 16px 18px;
+    border-radius: 10px;
+    background: #f0f1f4;
+    color: var(--hsm-ink);
+    font-size: 15px;
+  }
+  .hsm-success h3 { margin: 0 0 6px; font-size: 18px; }
+  .hsm-success p { margin: 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hsm-wrap * { transition: none !important; }
+  }
+</style>
+
+<script>
+(function () {
+  var HUBSPOT = {
+    portalId: '51922874',
+    formId: 'f9c089f7-0d36-48d6-a2e6-e76cf0c2b4f1',
+    endpoint: 'https://api.hsforms.com/submissions/v3/integration/submit'
+  };
+
+  var UTM_KEYS = ['utm_term', 'utm_content', 'utm_source', 'utm_medium', 'utm_campaign'];
+
+  var form = document.getElementById('hsm-form');
+  if (!form) return;
+
+  var success = document.getElementById('hsm-success');
+  var submitBtn = document.getElementById('hsm-submit');
+  var submitError = document.getElementById('hsm-submit-error');
+
+  var name = form.querySelector('#hsm-name');
+  var email = form.querySelector('#hsm-email');
+  var phone = form.querySelector('#hsm-phone');
+  var produto = form.querySelector('#hsm-produto');
+  var contrato = form.querySelector('#hsm-contrato');
+  var estado = form.querySelector('#hsm-estado');
+  var unidade = form.querySelector('#hsm-unidade');
+
+  function digitsOnly(value) {
+    return value.replace(/\D/g, '');
+  }
+
+  function maskPhone(value) {
+    var digits = digitsOnly(value).slice(0, 11);
+    if (!digits.length) return '';
+    if (digits.length <= 2) return '(' + digits;
+    if (digits.length <= 6) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2);
+    if (digits.length <= 10) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 6) + '-' + digits.slice(6);
+    return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 7) + '-' + digits.slice(7);
+  }
+
+  function validateName() {
+    var value = name.value.trim();
+    if (!value) return 'Informe seu nome.';
+    if (value.length < 2) return 'Informe pelo menos 2 caracteres.';
+    return '';
+  }
+
+  function validateEmail() {
+    var value = email.value.trim();
+    if (!value) return 'Informe seu e-mail.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) return 'Informe um e-mail válido.';
+    return '';
+  }
+
+  function validatePhone() {
+    var digits = digitsOnly(phone.value);
+    if (!digits.length) return 'Informe seu telefone.';
+    if (digits.length < 10 || digits.length > 11) return 'Informe um telefone válido com DDD.';
+    if (digits.length === 11 && digits.charAt(2) !== '9') return 'Celular deve começar com 9 após o DDD.';
+    return '';
+  }
+
+  function validateSelect(el) {
+    if (!el.value) return 'Selecione uma opção.';
+    return '';
+  }
+
+  var fieldList = [
+    { el: name, errorId: 'hsm-name-error', validate: validateName },
+    { el: email, errorId: 'hsm-email-error', validate: validateEmail },
+    { el: phone, errorId: 'hsm-phone-error', validate: validatePhone },
+    { el: produto, errorId: 'hsm-produto-error', validate: function () { return validateSelect(produto); } },
+    { el: contrato, errorId: 'hsm-contrato-error', validate: function () { return validateSelect(contrato); } },
+    { el: estado, errorId: 'hsm-estado-error', validate: function () { return validateSelect(estado); } },
+    { el: unidade, errorId: 'hsm-unidade-error', validate: function () { return validateSelect(unidade); } }
+  ];
+
+  function setFieldState(el, errorId, message) {
+    var errorEl = document.getElementById(errorId);
+    var isValid = !message;
+    el.classList.toggle('hsm-field--invalid', !isValid);
+    el.setAttribute('aria-invalid', isValid ? 'false' : 'true');
+    if (errorEl) errorEl.textContent = message || '';
+  }
+
+  function validateField(field) {
+    var message = field.validate();
+    setFieldState(field.el, field.errorId, message);
+    return !message;
+  }
+
+  function validateForm() {
+    var isValid = true;
+    fieldList.forEach(function (field) {
+      if (!validateField(field)) isValid = false;
+    });
+    return isValid;
+  }
+
+  phone.addEventListener('input', function () {
+    var cursorFromEnd = phone.value.length - phone.selectionStart;
+    phone.value = maskPhone(phone.value);
+    var nextPos = Math.max(phone.value.length - cursorFromEnd, 0);
+    phone.setSelectionRange(nextPos, nextPos);
+  });
+
+  fieldList.forEach(function (field) {
+    var eventName = field.el.tagName === 'SELECT' ? 'change' : 'input';
+    field.el.addEventListener('blur', function () { validateField(field); });
+    field.el.addEventListener(eventName, function () {
+      if (field.el.classList.contains('hsm-field--invalid')) validateField(field);
+    });
+  });
+
+  function getHubspotUtk() {
+    var match = document.cookie.match(/(?:^|;\s*)hubspotutk=([^;]+)/);
+    return match ? match[1] : '';
+  }
+
+  function getUtms() {
+    var params = new URLSearchParams(window.location.search);
+    var utms = {};
+    UTM_KEYS.forEach(function (key) {
+      utms[key] = params.get(key) || '';
+    });
+    return utms;
+  }
+
+  function buildHubspotFields(lead) {
+    var fields = [
+      { name: 'name', value: lead.name },
+      { name: 'email', value: lead.email },
+      { name: 'phone', value: lead.phone },
+      { name: 'produto_de_interessse', value: lead.produto },
+      { name: 'tem_contrato_social', value: lead.contrato },
+      { name: 'estado_uf', value: lead.estado },
+      { name: 'unidades', value: lead.unidade }
+    ];
+
+    UTM_KEYS.forEach(function (key) {
+      var value = lead.utms[key];
+      if (value) fields.push({ name: key, value: value });
+    });
+
+    return fields;
+  }
+
+  function submitToHubspot(lead) {
+    var hutk = getHubspotUtk();
+    var context = { pageUri: window.location.href, pageName: document.title };
+    if (hutk) context.hutk = hutk;
+
+    return fetch(HUBSPOT.endpoint + '/' + HUBSPOT.portalId + '/' + HUBSPOT.formId, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        submittedAt: Date.now(),
+        fields: buildHubspotFields(lead),
+        context: context
+      })
+    }).then(function (response) {
+      if (!response.ok) {
+        return response.json().catch(function () { return {}; }).then(function (error) {
+          throw new Error(error.message || 'Erro ao enviar formulário');
+        });
+      }
+      return response.json();
+    });
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    if (!validateForm()) {
+      var firstInvalid = form.querySelector('.hsm-field--invalid');
+      if (firstInvalid && firstInvalid.focus) firstInvalid.focus();
+      return;
+    }
+
+    submitError.classList.remove('show');
+
+    var lead = {
+      name: name.value.trim(),
+      email: email.value.trim(),
+      phone: '+55' + digitsOnly(phone.value),
+      produto: produto.value,
+      contrato: contrato.value,
+      estado: estado.value,
+      unidade: unidade.value,
+      utms: getUtms()
+    };
+
+    var originalLabel = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+
+    submitToHubspot(lead).then(function () {
+      if (typeof fbq === 'function') fbq('track', 'Lead');
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }).catch(function (err) {
+      console.error('HubSpot submit error:', err);
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+      submitError.classList.add('show');
+    });
+  });
+})();
+</script>

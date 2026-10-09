@@ -1,0 +1,8 @@
+# Contém token do Kommo e secret do Turnstile — não pode ir para repositório público.
+# Substituído pelo formulário HubSpot (assets/embed-smart.html).
+send-form-kommo.php
+
+# Trechos de cópia para o Hostinger
+_hostinger/
+
+.vercel
